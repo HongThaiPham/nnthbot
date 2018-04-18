@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] === 'trungtamngoaingutinhoc') {
+        console.log(req.query['hub.challenge']);ß
         res.send(req.query['hub.challenge']);
     }
     res.send('Error, wrong validation token');
@@ -32,6 +33,7 @@ app.get('/webhook', function (req, res) {
 // Đoạn code xử lý khi có người nhắn tin cho bot
 app.post('/webhook', function (req, res) {
     var entries = req.body.entry;
+    console.log(entries);
     for (var entry of entries) {
         var messaging = entry.messaging;
         for (var message of messaging) {
@@ -59,7 +61,7 @@ function sendMessage(senderId, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {
-            access_token: "EAABw0dVwnWcBAO38Il24eZAHYaEuZCjWYOl3qEsaK7630eo7GgxZAKtMi0M7KLqOaTIUROtU0A9461dZCziuElSE7pi5ZCZBeTrXdyvxi9PdtWS5ksEJA2ZB8WFSSfhcrZCBnq3Joq9IqyFqdNEkDZAhAtb2ZAh1RR4uGmF9VM2ZA2xHgZDZD",
+            access_token: "EAABw0dVwnWcBAK8MwqWZCLRuYrfzDOSZB5lrCernt4zKZCeCYFxLeDDCIemqZAiK9CiNzIQaEXZCenzlRCjYxSYasjOmCXA8whVyn4VYFPZAuYeTR7kS1GrzFMgaoX1AxUCyJghjkwGbS8xMI2ynViJWpRp2bGj4CFj8EebhY9XAZDZD",
         },
         method: 'POST',
         json: {
